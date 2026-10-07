@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lawrence Gakuru Mwendia | Data Analyst Portfolio</title>
+<style>
+:root{--bg:#f7f8fa;--card:#fff;--text:#1b2430;--muted:#5b6675;--accent:#0f5fa8;--line:#dfe3e8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12161c;--card:#1a2029;--text:#e8ecf1;--muted:#9aa5b4;--accent:#5aa9ec;--line:#2b3441}}
+:root[data-theme="dark"]{--bg:#12161c;--card:#1a2029;--text:#e8ecf1;--muted:#9aa5b4;--accent:#5aa9ec;--line:#2b3441}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:880px;margin:0 auto;padding:32px 20px 56px}
+h1{font-size:2rem;margin:0 0 4px}
+.sub{color:var(--muted);margin:0 0 14px}
+.contact{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.95rem;margin-bottom:24px}
+a{color:var(--accent)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;margin:16px 0}
+.card h2{font-size:1.15rem;margin:0 0 4px}
+.tag{display:inline-block;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.q{color:var(--muted);font-style:italic;margin:6px 0 10px}
+h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:14px 0 4px}
+ul{margin:0;padding-left:20px}li{margin:3px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+.flow span{background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:.85rem}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{text-align:left;padding:6px 10px;border-bottom:1px solid var(--line)}
+th{color:var(--muted);font-weight:600}
+.note{color:var(--muted);font-size:.85rem;margin-top:28px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Lawrence Gakuru Mwendia</h1>
+<p class="sub">Data Analyst Portfolio: anonymised case studies in reporting automation, data reconciliation and decision-ready dashboards</p>
+<div class="contact">
+<a href="mailto:lgakuru20@gmail.com">lgakuru20@gmail.com</a>
+<span>+254 717 363 669</span>
+<span>Nairobi, Kenya</span>
+<a href="https://linkedin.com/in/lawrence-gakuru-263ab236b">LinkedIn</a>
+</div>
+
+<div class="card">
+<h2>About this portfolio</h2>
+<p>These case studies come from my work as Management Information Systems Officer at a credit reference bureau serving financial services clients. All client, staff and customer details have been removed and no real data appears here. Each case follows the same pattern: define the question, clean and reconcile the data, document the rules, and communicate the result plainly.</p>
+<div class="grid">
+<div><h3>Tools</h3>Python (pandas, openpyxl), SQL, Power BI, Tableau, Excel</div>
+<div><h3>Data sources</h3>CRM portfolio exports, PBX call detail records (CDR), payment and roster files</div>
+<div><h3>Outputs</h3>Daily and weekly workbooks, executive dashboards, written briefs</div>
+</div>
+</div>
+
+<div class="card">
+<span class="tag">Case 1</span>
+<h2>Automated daily collections activity report</h2>
+<p class="q">Managers needed a daily view of whether outcomes logged in the CRM were backed by real dialling activity, per officer and per hour, without an analyst building it by hand each evening.</p>
+<h3>What I did</h3>
+<ul>
+<li>Built a Python pipeline that loads PBX call records and CRM exports, filters to the report date, reconciles the two sources and writes a styled seven-tab Excel workbook: summary, officer activity (CRM vs PBX), hourly PBX activity, hourly CRM activity, accounts not called, and month-to-date payments.</li>
+<li>Defined colour-coded coverage statuses so managers see problems at a glance.</li>
+<li>Handled real-world data issues: phone numbers stored as imprecise floats (matched on the string field instead), files spanning several dates, trailing blank rows, comma-formatted numbers, and a morning-only window for Saturdays.</li>
+<li>Used an authoritative officer-to-extension reference file instead of guessing from caller-ID text, and recalculated every workbook automatically to catch errors before sending.</li>
+</ul>
+<div class="flow"><span>PBX call records</span>→<span>CRM exports</span>→<span>Clean &amp; normalise</span>→<span>Reconcile CRM vs PBX</span>→<span>7-tab workbook</span>→<span>Validate &amp; email</span></div>
+<h3>Result</h3>
+<p>A fully automated daily report that replaced a manual process and gives leaders a consistent, comparable view, including repeat flags for officers whose activity swings sharply between days.</p>
+<h3>Sample metric definitions</h3>
+<div class="grid">
+<div class="scroll"><table><tr><th>Status</th><th>Rule</th></tr>
+<tr><td>COMPLETE</td><td>&ge; 100% of files covered</td></tr>
+<tr><td>NEAR COMPLETE</td><td>&ge; 90%</td></tr>
+<tr><td>PARTIAL</td><td>&ge; 70%</td></tr>
+<tr><td>CRITICAL GAP</td><td>&lt; 70%</td></tr>
+<tr><td>INACTIVE / NO MAPPING</td><td>No activity, or no extension mapping</td></tr></table></div>
+<div class="scroll"><table><tr><th>Call outcome</th><th>Duration</th></tr>
+<tr><td>Called, no answer</td><td>45 seconds or less</td></tr>
+<tr><td>Called, answered</td><td>46 to 105 seconds</td></tr>
+<tr><td>Called, answered (substantial)</td><td>Over 105 seconds</td></tr>
+<tr><td>Not actioned</td><td>No call attempt found</td></tr></table></div>
+</div>
+</div>
+
+<div class="card">
+<span class="tag">Case 2</span>
+<h2>Verifying a worksheet of accounts against call records</h2>
+<p class="q">A worksheet of several hundred accounts needed checking against telephony records to see which had actually been called on the day, and what happened on the call.</p>
+<ul>
+<li>Preserved the original population exactly (same number of rows in and out) and left the original eight columns untouched, adding nine verification columns beside them.</li>
+<li>Matched primary and alternative phone numbers across several CDR files, accepting only qualifying outbound calls on the report date and keeping the longest match per row.</li>
+<li>Classified each account by call duration into the four outcome categories above.</li>
+<li>Stated the limits clearly in the cover note: CDR coverage ended mid-afternoon, recording flags are metadata rather than playback checks, and ownership was not inferred where the source had no owner field.</li>
+</ul>
+<h3>Result</h3>
+<p>A reproducible, auditable check where the method, exclusions and caveats are all written down, so reviewers know exactly what the numbers do and do not show.</p>
+<p><small>Tools: Python, pandas, Excel</small></p>
+</div>
+
+<div class="card">
+<span class="tag">Case 3</span>
+<h2>Investigating a revenue discrepancy</h2>
+<p class="q">A colleague's half-year figures did not agree with the master data. Where did the difference come from?</p>
+<ul>
+<li>Traced one officer's records across the CRM and the telephony system to compare what each source showed.</li>
+<li>Found that four officers in the colleague's sheets were missing from the current master roster, a clear data-integrity flag.</li>
+<li>Reported the root cause as unconfirmed, setting out the evidence and open questions instead of asserting a theory the data could not support.</li>
+</ul>
+<h3>Result</h3>
+<p>A clear, honest written finding that let leadership decide what to verify next, with no unsupported claims.</p>
+<p><small>Tools: Excel, Python, cross-source reconciliation</small></p>
+</div>
+
+<div class="card">
+<span class="tag">Case 4</span>
+<h2>Weekly executive intelligence brief</h2>
+<p class="q">Senior leadership wanted one short weekly read on collections performance across several lenders.</p>
+<ul>
+<li>Combined call volumes and connect rates by lender, a finance payment backlog, and a portfolio data anomaly flagged for verification.</li>
+<li>Wrote findings in plain language with named action recommendations rather than raw tables.</li>
+</ul>
+<h3>Result</h3>
+<p>A repeatable weekly brief that gave the Group Managing Director a decision-ready summary.</p>
+<p><small>Tools: Power BI, Excel, written briefing</small></p>
+</div>
+
+<div class="card">
+<span class="tag">Case 5</span>
+<h2>Multi-tab executive KPI dashboards</h2>
+<p class="q">Leadership needed one consistent set of KPIs instead of separate, differently defined reports.</p>
+<ul>
+<li>Designed a standardised KPI framework covering contact rates, conversion rates, collection rates and productivity.</li>
+<li>Built multi-tab dashboards in Power BI and Excel with week-over-week trend comparisons and recommendations.</li>
+</ul>
+<h3>Result</h3>
+<p>Delivered every week for more than five consecutive months, giving leaders a stable baseline for comparison.</p>
+<p><small>Tools: Power BI, Excel</small></p>
+</div>
+
+<p class="note">Anonymised for confidentiality: no client names, staff names, customer data or real figures are shown. Screenshots and walkthroughs of the workbook structure can be shown in an interview where permitted.</p>
+</div>
+</body>
+</html>
